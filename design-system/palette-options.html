@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>YY 系列视觉手册 · 标准色候选</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: #20243a;
+      background: #ffffff;
+      font-family: "Manrope", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lead {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+      align-items: end;
+      gap: 40px;
+      padding: 40px 32px 32px;
+      border-bottom: 1px solid rgba(32, 36, 58, 0.12);
+    }
+
+    .lead-chapter {
+      margin: 0 0 10px;
+      color: #667085;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .lead h1 {
+      margin: 0;
+      font-family: "DM Serif Display", "Noto Serif SC", "Songti SC", serif;
+      font-size: 2.6rem;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .lead p:not(.lead-chapter) {
+      max-width: 46rem;
+      margin: 0;
+      color: #667085;
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .plates {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* 每个方案自带一整套变量，下面的示例只读这些变量 */
+    .plate {
+      --c1: #2854d8;  --on1: #ffffff;
+      --c2: #f36f4e;  --on2: #20243a;
+      --c3: #243b7a;  --on3: #ffffff;
+      --link: #2854d8;
+      --flag-bg: #fde9e2;
+      --flag-text: #a63b22;
+      --canvas: #f7f8fb;
+      --surface: #ffffff;
+      --ink: #20243a;
+      --muted: #667085;
+      --line: rgba(32, 36, 58, 0.12);
+
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-width: 0;
+      padding: 26px 24px 36px;
+      color: var(--ink);
+      background: var(--canvas);
+      border-right: 1px solid rgba(32, 36, 58, 0.12);
+    }
+
+    .plate:last-child { border-right: 0; }
+
+    .plate--2 {
+      --c1: #243b7a;  --on1: #ffffff;
+      --c2: #f36f4e;  --on2: #20243a;
+      --c3: #ffb86c;  --on3: #20243a;
+      --link: #a63b22;
+      --canvas: #fff8ef;
+      --surface: #fffdf9;
+      --muted: #5f6885;
+    }
+
+    .plate--3 {
+      --c1: #0f6f64;  --on1: #ffffff;
+      --c2: #dc9a22;  --on2: #1d211f;
+      --c3: #eee7da;  --on3: #1d211f;
+      --link: #0f6f64;
+      --flag-bg: #fff1d7;
+      --flag-text: #80500d;
+      --canvas: #f7f3ea;
+      --surface: #fffdf8;
+      --ink: #1d211f;
+      --muted: #6e6a62;
+      --line: #d9d0c1;
+    }
+
+    .plate--4 {
+      --c1: #2854d8;  --on1: #ffffff;
+      --c2: #ffc83d;  --on2: #20243a;
+      --c3: #20243a;  --on3: #ffffff;
+      --flag-bg: #fff3cf;
+      --flag-text: #6b4d00;
+    }
+
+    .plate-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .plate-head h2 {
+      margin: 0;
+      font-family: "DM Serif Display", "Noto Serif SC", "Songti SC", serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .plate-head h2 small {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-family: "Manrope", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .pick {
+      flex: 0 0 auto;
+      padding: 5px 12px;
+      border-radius: 999px;
+      color: var(--on1);
+      background: var(--c1);
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    .group-title {
+      margin: 6px 0 -8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* 使用比例：三块面积即 60 / 30 / 10 */
+    .ratio {
+      display: grid;
+      grid-template-columns: 6fr 4fr;
+      grid-template-rows: 3fr 1fr;
+      height: 210px;
+      overflow: hidden;
+      border-radius: 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .ratio span {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-width: 0;
+      padding: 12px 14px;
+    }
+
+    .ratio b {
+      font-family: "DM Serif Display", serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .ratio-1 { grid-row: 1 / 3; color: var(--on1); background: var(--c1); }
+    .ratio-2 { color: var(--on2); background: var(--c2); }
+    .ratio-3 { flex-direction: row !important; align-items: center; justify-content: space-between !important; gap: 8px; color: var(--on3); background: var(--c3); }
+    .ratio-3 b { font-size: 1.15rem; }
+
+    /* 标准色色卡 */
+    .chips {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chips li {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.82rem;
+    }
+
+    .chips li:last-child { border-bottom: 1px solid var(--line); }
+
+    .chips i {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--sw);
+    }
+
+    .chips strong { display: block; font-weight: 800; }
+    .chips small { color: var(--muted); font-size: 0.74rem; }
+
+    .chips code {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .chips code span { display: block; color: var(--muted); font-weight: 500; }
+
+    /* 占位标识 */
+    .marks {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--fg);
+      background: var(--bg);
+      font-family: "DM Serif Display", serif;
+      font-size: 2.3rem;
+      line-height: 1;
+    }
+
+    .mark::after {
+      content: "";
+      position: relative;
+    }
+
+    .mark span { display: inline-flex; align-items: baseline; gap: 3px; }
+
+    .mark span::after {
+      width: 0.26em;
+      height: 0.26em;
+      border-radius: 50%;
+      content: "";
+      background: var(--dot);
+    }
+
+    /* 色块上的应用 */
+    .banner {
+      position: relative;
+      display: grid;
+      gap: 6px;
+      overflow: hidden;
+      padding: 20px 20px 22px;
+      border-radius: 16px;
+      color: var(--on1);
+      background: var(--c1);
+    }
+
+    .banner::after {
+      position: absolute;
+      right: -46px;
+      bottom: -46px;
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      content: "";
+      background: var(--c3);
+    }
+
+    .banner strong {
+      font-family: "DM Serif Display", "Noto Serif SC", "Songti SC", serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .banner span { font-size: 0.84rem; opacity: 0.86; }
+
+    .banner button {
+      position: relative;
+      z-index: 1;
+      justify-self: start;
+      margin-top: 10px;
+      padding: 9px 16px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--on2);
+      background: var(--c2);
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .banner button:focus-visible { outline: 3px solid var(--on1); outline-offset: 3px; }
+
+    /* 浅底上的应用 */
+    .mock {
+      display: grid;
+      gap: 14px;
+      padding: 16px 18px 8px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+    }
+
+    .mock-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mock-brand { font-family: "DM Serif Display", serif; font-size: 1.1rem; }
+    .mock-brand b { color: var(--link); font-weight: 400; }
+
+    .mock-bar a {
+      color: var(--link);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+
+    .mock-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .btn {
+      padding: 9px 15px;
+      border: 1.5px solid var(--c1);
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn--solid { color: var(--on1); background: var(--c1); }
+    .btn--quiet { color: var(--c1); background: transparent; }
+    .btn:focus-visible { outline: 3px solid var(--c1); outline-offset: 3px; }
+
+    .quotes { margin: 0; padding: 0; list-style: none; font-size: 0.8rem; }
+
+    .quotes li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .quotes small { color: var(--muted); font-size: 0.72rem; }
+    .quotes .up { color: #d03a2f; font-weight: 800; }
+    .quotes .down { color: #1a8a55; font-weight: 800; }
+
+    .flag {
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: var(--flag-text);
+      background: var(--flag-bg);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    /* 文字搭配规范 */
+    .pairs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pairs li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .pairs em { font-size: 0.72rem; font-style: normal; font-weight: 600; opacity: 0.9; }
+    .pairs .no span { text-decoration: line-through; }
+
+    .verdict { margin-block: 0; font-size: 0.88rem; line-height: 1.75; }
+    .verdict + .verdict { margin-top: -10px; color: var(--muted); }
+
+    @media (max-width: 1180px) {
+      .plates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .plate:nth-child(2) { border-right: 0; }
+      .plate { border-bottom: 1px solid rgba(32, 36, 58, 0.12); }
+    }
+
+    @media (max-width: 640px) {
+      .lead { grid-template-columns: 1fr; gap: 14px; padding: 28px 20px 24px; }
+      .lead h1 { font-size: 2rem; }
+      .plates { grid-template-columns: 1fr; }
+      .plate { padding-inline: 20px; border-right: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="lead">
+    <div>
+      <p class="lead-chapter">YY 系列视觉手册　第一章</p>
+      <h1>标准色候选</h1>
+    </div>
+    <p>每个方案是三个颜色一组：主色占大面积，辅助色做对比，第三色收尾。每一栏从上到下依次是使用比例、色卡、三色组合在标识和界面上的样子、文字搭配规范。标识只是“YY”加一个点的占位，行情涨跌幅是示例数字；字体沿用导航页现有的，这一步只比颜色。</p>
+  </header>
+
+  <main class="plates">
+    <!-- 方案一 -->
+    <section class="plate plate--1" aria-labelledby="p1">
+      <div class="plate-head">
+        <h2 id="p1"><small>方案一</small>宝蓝 · 珊瑚 · 藏青</h2>
+        <span class="pick">我的推荐</span>
+      </div>
+
+      <div class="ratio" aria-label="使用比例">
+        <span class="ratio-1"><b>60</b>宝蓝</span>
+        <span class="ratio-2"><b>30</b>珊瑚</span>
+        <span class="ratio-3">藏青<b>10</b></span>
+      </div>
+
+      <ul class="chips">
+        <li><i style="--sw:#2854d8"></i><span><strong>宝蓝</strong><small>主色：按钮、链接、标识</small></span><code>#2854D8<span>40 84 216</span></code></li>
+        <li><i style="--sw:#f36f4e"></i><span><strong>珊瑚</strong><small>辅助色：色块、强调</small></span><code>#F36F4E<span>243 111 78</span></code></li>
+        <li><i style="--sw:#243b7a"></i><span><strong>藏青</strong><small>深色：页脚、深底区块</small></span><code>#243B7A<span>36 59 122</span></code></li>
+      </ul>
+
+      <p class="group-title">组合起来</p>
+      <div class="marks">
+        <div class="mark" style="--bg:#2854d8;--fg:#fff;--dot:#f36f4e"><span>YY</span></div>
+        <div class="mark" style="--bg:#fff;--fg:#2854d8;--dot:#f36f4e"><span>YY</span></div>
+        <div class="mark" style="--bg:#243b7a;--fg:#fff;--dot:#f36f4e"><span>YY</span></div>
+      </div>
+
+      <div class="banner">
+        <strong>NewsYY</strong>
+        <span>个性化每日晨报，七点前送到。</span>
+        <button type="button">阅读今天的晨报</button>
+      </div>
+
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-brand">Finance<b>YY</b></span><a href="#p1">查看研究方法</a></div>
+        <div class="mock-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <p class="group-title">文字搭配规范</p>
+      <ul class="pairs">
+        <li style="--bg:#2854d8;--fg:#fff"><span>白字</span><em>6.3 可用</em></li>
+        <li style="--bg:#f36f4e;--fg:#20243a"><span>墨字</span><em>5.2 可用</em></li>
+        <li style="--bg:#243b7a;--fg:#fff"><span>白字</span><em>10.6 可用</em></li>
+        <li class="no" style="--bg:#f36f4e;--fg:#fff"><span>白字</span><em>2.9 禁用</em></li>
+      </ul>
+
+      <p class="verdict">蓝橙互补，最亮最有精神；三个颜色你的站点里都已经在用，迁移成本最低。蓝色不和红涨绿跌冲突，八个题材都压得住。</p>
+      <p class="verdict">要守的规矩：珊瑚只做色块和强调，不用在行情数字和状态上；珊瑚底上只能放墨字。</p>
+    </section>
+
+    <!-- 方案二 -->
+    <section class="plate plate--2" aria-labelledby="p2">
+      <div class="plate-head">
+        <h2 id="p2"><small>方案二</small>藏青 · 珊瑚 · 蜜桃</h2>
+      </div>
+
+      <div class="ratio" aria-label="使用比例">
+        <span class="ratio-1"><b>60</b>藏青</span>
+        <span class="ratio-2"><b>30</b>珊瑚</span>
+        <span class="ratio-3">蜜桃<b>10</b></span>
+      </div>
+
+      <ul class="chips">
+        <li><i style="--sw:#243b7a"></i><span><strong>藏青</strong><small>主色：按钮、标识、深底</small></span><code>#243B7A<span>36 59 122</span></code></li>
+        <li><i style="--sw:#f36f4e"></i><span><strong>珊瑚</strong><small>辅助色：色块、强调</small></span><code>#F36F4E<span>243 111 78</span></code></li>
+        <li><i style="--sw:#ffb86c"></i><span><strong>蜜桃</strong><small>点缀色：装饰、浅色块</small></span><code>#FFB86C<span>255 184 108</span></code></li>
+      </ul>
+
+      <p class="group-title">组合起来</p>
+      <div class="marks">
+        <div class="mark" style="--bg:#243b7a;--fg:#fff;--dot:#f36f4e"><span>YY</span></div>
+        <div class="mark" style="--bg:#fffdf9;--fg:#243b7a;--dot:#f36f4e"><span>YY</span></div>
+        <div class="mark" style="--bg:#ffb86c;--fg:#243b7a;--dot:#243b7a"><span>YY</span></div>
+      </div>
+
+      <div class="banner">
+        <strong>NewsYY</strong>
+        <span>个性化每日晨报，七点前送到。</span>
+        <button type="button">阅读今天的晨报</button>
+      </div>
+
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-brand">Finance<b>YY</b></span><a href="#p2">查看研究方法</a></div>
+        <div class="mock-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <p class="group-title">文字搭配规范</p>
+      <ul class="pairs">
+        <li style="--bg:#243b7a;--fg:#fff"><span>白字</span><em>10.6 可用</em></li>
+        <li style="--bg:#f36f4e;--fg:#20243a"><span>墨字</span><em>5.2 可用</em></li>
+        <li style="--bg:#ffb86c;--fg:#243b7a"><span>藏青字</span><em>6.2 可用</em></li>
+        <li class="no" style="--bg:#f36f4e;--fg:#fff"><span>白字</span><em>2.9 禁用</em></li>
+      </ul>
+
+      <p class="verdict">暖、沉稳、有个人气质，就是你个人站现在的味道，放在奶油底上最舒服。</p>
+      <p class="verdict">问题是藏青和正文墨色太近，链接只能改用深珊瑚，于是链接、涨幅、报错三样都挤在红橙色里；整体偏“个人主页”，套到工具类站点会显得软。</p>
+    </section>
+
+    <!-- 方案三 -->
+    <section class="plate plate--3" aria-labelledby="p3">
+      <div class="plate-head">
+        <h2 id="p3"><small>方案三</small>松青 · 琥珀 · 米纸</h2>
+      </div>
+
+      <div class="ratio" aria-label="使用比例">
+        <span class="ratio-1"><b>60</b>松青</span>
+        <span class="ratio-2"><b>30</b>琥珀</span>
+        <span class="ratio-3">米纸<b>10</b></span>
+      </div>
+
+      <ul class="chips">
+        <li><i style="--sw:#0f6f64"></i><span><strong>松青</strong><small>主色：按钮、链接、标识</small></span><code>#0F6F64<span>15 111 100</span></code></li>
+        <li><i style="--sw:#dc9a22"></i><span><strong>琥珀</strong><small>辅助色：色块、强调</small></span><code>#DC9A22<span>220 154 34</span></code></li>
+        <li><i style="--sw:#eee7da"></i><span><strong>米纸</strong><small>浅色：区块底、留白</small></span><code>#EEE7DA<span>238 231 218</span></code></li>
+      </ul>
+
+      <p class="group-title">组合起来</p>
+      <div class="marks">
+        <div class="mark" style="--bg:#0f6f64;--fg:#fff;--dot:#dc9a22"><span>YY</span></div>
+        <div class="mark" style="--bg:#fffdf8;--fg:#0f6f64;--dot:#dc9a22"><span>YY</span></div>
+        <div class="mark" style="--bg:#dc9a22;--fg:#1d211f;--dot:#0f6f64"><span>YY</span></div>
+      </div>
+
+      <div class="banner">
+        <strong>NewsYY</strong>
+        <span>个性化每日晨报，七点前送到。</span>
+        <button type="button">阅读今天的晨报</button>
+      </div>
+
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-brand">Finance<b>YY</b></span><a href="#p3">查看研究方法</a></div>
+        <div class="mock-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <p class="group-title">文字搭配规范</p>
+      <ul class="pairs">
+        <li style="--bg:#0f6f64;--fg:#fff"><span>白字</span><em>6.0 可用</em></li>
+        <li style="--bg:#dc9a22;--fg:#1d211f"><span>墨字</span><em>6.7 可用</em></li>
+        <li style="--bg:#eee7da;--fg:#0f6f64"><span>松青字</span><em>4.9 可用</em></li>
+        <li class="no" style="--bg:#dc9a22;--fg:#fff"><span>白字</span><em>2.4 禁用</em></li>
+      </ul>
+
+      <p class="verdict">最有书卷气，像一份认真排过版的报纸，四组里最不像“科技站”。来自 NewsYY 现在的配色。</p>
+      <p class="verdict">但主色是绿色系：在 FinanceYY 里和“绿跌”混在一起，放到扑克、世界杯、游戏上偏沉，不够年轻。</p>
+    </section>
+
+    <!-- 方案四 -->
+    <section class="plate plate--4" aria-labelledby="p4">
+      <div class="plate-head">
+        <h2 id="p4"><small>方案四</small>宝蓝 · 明黄 · 墨</h2>
+      </div>
+
+      <div class="ratio" aria-label="使用比例">
+        <span class="ratio-1"><b>60</b>宝蓝</span>
+        <span class="ratio-2"><b>30</b>明黄</span>
+        <span class="ratio-3">墨<b>10</b></span>
+      </div>
+
+      <ul class="chips">
+        <li><i style="--sw:#2854d8"></i><span><strong>宝蓝</strong><small>主色：按钮、链接、标识</small></span><code>#2854D8<span>40 84 216</span></code></li>
+        <li><i style="--sw:#ffc83d"></i><span><strong>明黄</strong><small>辅助色：色块、强调</small></span><code>#FFC83D<span>255 200 61</span></code></li>
+        <li><i style="--sw:#20243a"></i><span><strong>墨</strong><small>深色：正文、深底区块</small></span><code>#20243A<span>32 36 58</span></code></li>
+      </ul>
+
+      <p class="group-title">组合起来</p>
+      <div class="marks">
+        <div class="mark" style="--bg:#2854d8;--fg:#fff;--dot:#ffc83d"><span>YY</span></div>
+        <div class="mark" style="--bg:#ffc83d;--fg:#20243a;--dot:#2854d8"><span>YY</span></div>
+        <div class="mark" style="--bg:#20243a;--fg:#fff;--dot:#ffc83d"><span>YY</span></div>
+      </div>
+
+      <div class="banner">
+        <strong>NewsYY</strong>
+        <span>个性化每日晨报，七点前送到。</span>
+        <button type="button">阅读今天的晨报</button>
+      </div>
+
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-brand">Finance<b>YY</b></span><a href="#p4">查看研究方法</a></div>
+        <div class="mock-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <p class="group-title">文字搭配规范</p>
+      <ul class="pairs">
+        <li style="--bg:#2854d8;--fg:#fff"><span>白字</span><em>6.3 可用</em></li>
+        <li style="--bg:#ffc83d;--fg:#20243a"><span>墨字</span><em>9.9 可用</em></li>
+        <li style="--bg:#20243a;--fg:#ffc83d"><span>黄字</span><em>9.9 可用</em></li>
+        <li class="no" style="--bg:#ffc83d;--fg:#fff"><span>白字</span><em>1.5 禁用</em></li>
+      </ul>
+
+      <p class="verdict">对比最强、最有记忆点，蓝黄墨三色离红涨绿跌都远，行情页上最干净；黄底墨字、墨底黄字都好读。</p>
+      <p class="verdict">风险是黄色在你现有站点里完全没有，全部要新加；黄色也容易让人想到“警告”，而且蓝黄撞色大家会先想到宜家。</p>
+    </section>
+  </main>
+</body>
+</html>

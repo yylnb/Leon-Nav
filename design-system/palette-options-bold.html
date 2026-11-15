@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>YY 系列视觉手册 · 标准色候选（张扬版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Manrope:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --display: "Bricolage Grotesque", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      --night: #15151c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: #ffffff;
+      background: var(--night);
+      font-family: "Manrope", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 顶栏：四组之间跳转 */
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 28px;
+      background: var(--night);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .top nav { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    .top a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .top a:hover { background: rgba(255, 255, 255, 0.12); }
+    .top a:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+
+    .top i {
+      width: 22px;
+      height: 12px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--a) 0 34%, var(--b) 34% 67%, var(--c) 67%);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      align-items: end;
+      gap: 48px;
+      padding: 56px 56px 60px;
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 5.4vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .intro p {
+      max-width: 44rem;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    /* 跨页：每组颜色一整屏，所有元素只读这一组变量 */
+    .spread {
+      --c1: #ffd60a;  --on1: #15151c;
+      --c2: #15151c;  --on2: #ffd60a;
+      --c3: #2438ff;  --on3: #ffffff;
+      --p-bg: #15151c; --p-fg: #ffd60a; --p-shape: #2438ff;
+      --ink: #15151c;
+      --link: #2438ff;
+      --btn-bg: #15151c; --btn-fg: #ffd60a;
+      --flag-bg: #fff3b0; --flag-text: #5c4a00;
+
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 36px 24px;
+      padding: 72px 56px 84px;
+      color: var(--on1);
+      background: var(--c1);
+      scroll-margin-top: 48px;
+    }
+
+    .spread--2 {
+      --c1: #1f2cff;  --on1: #ffffff;
+      --c2: #ff4a1c;  --on2: #15151c;
+      --c3: #ffc4dc;  --on3: #1f2cff;
+      --p-bg: #ffc4dc; --p-fg: #1f2cff; --p-shape: #ff4a1c;
+      --link: #1f2cff;
+      --btn-bg: #1f2cff; --btn-fg: #ffffff;
+      --flag-bg: #ffe1ec; --flag-text: #a3123f;
+    }
+
+    .spread--3 {
+      --c1: #ffb8d9;  --on1: #06241a;
+      --c2: #ff4124;  --on2: #06241a;
+      --c3: #06241a;  --on3: #ffb8d9;
+      --p-bg: #06241a; --p-fg: #ffb8d9; --p-shape: #ff4124;
+      --ink: #06241a;
+      --link: #c7260c;
+      --btn-bg: #06241a; --btn-fg: #ffb8d9;
+      --flag-bg: #ffd9ea; --flag-text: #06241a;
+    }
+
+    .spread--4 {
+      --c1: #4a22e8;  --on1: #ffffff;
+      --c2: #c9f53b;  --on2: #170f2e;
+      --c3: #170f2e;  --on3: #c9f53b;
+      --p-bg: #c9f53b; --p-fg: #4a22e8; --p-shape: #170f2e;
+      --ink: #170f2e;
+      --link: #4a22e8;
+      --btn-bg: #4a22e8; --btn-fg: #ffffff;
+      --flag-bg: #eef9c4; --flag-text: #3d5200;
+    }
+
+    /* 标题区 */
+    .title { grid-column: 1 / 8; min-width: 0; }
+
+    .title-no {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 6px;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .pick {
+      padding: 5px 13px;
+      border-radius: 999px;
+      color: var(--c1);
+      background: var(--on1);
+      font-family: "Manrope", "Noto Sans SC", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .title h2 {
+      margin: 0 0 0 -0.04em;
+      font-family: var(--display);
+      font-size: clamp(5rem, 13vw, 12.5rem);
+      font-weight: 900;
+      line-height: 0.98;
+    }
+
+    .title-trio {
+      margin: 22px 0 0;
+      font-family: var(--display);
+      font-size: clamp(1.3rem, 2.2vw, 2rem);
+      font-weight: 800;
+    }
+
+    .title-idea {
+      max-width: 36rem;
+      margin: 12px 0 0;
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.85;
+    }
+
+    /* 色彩规格 */
+    .spec { grid-column: 8 / 13; align-self: end; min-width: 0; }
+
+    .ratio {
+      display: grid;
+      grid-template-columns: 6fr 3fr 1fr;
+      height: 76px;
+      border: 3px solid var(--on1);
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .ratio span { display: flex; align-items: flex-end; padding: 6px 10px; }
+    .ratio span:nth-child(1) { color: var(--on1); background: var(--c1); }
+    .ratio span:nth-child(2) { color: var(--on2); background: var(--c2); }
+    .ratio span:nth-child(3) { color: var(--on3); background: var(--c3); }
+
+    .chips { margin: 14px 0 0; padding: 0; list-style: none; }
+
+    .chips li {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 2px solid var(--on1);
+    }
+
+    .chips i {
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--on1);
+      background: var(--sw);
+    }
+
+    .chips strong { display: block; font-size: 1.05rem; font-weight: 900; }
+    .chips small { font-size: 0.8rem; font-weight: 500; }
+
+    .chips code {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.35;
+      text-align: right;
+    }
+
+    .chips code span { display: block; font-size: 0.8rem; font-weight: 500; }
+
+    /* 三块应用 */
+    .poster, .cards, .sheet { min-width: 0; min-height: 400px; }
+
+    .poster {
+      position: relative;
+      grid-column: 1 / 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 24px 26px 8px;
+      border-radius: 28px;
+      color: var(--p-fg);
+      background: var(--p-bg);
+    }
+
+    .poster::before {
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      content: "";
+      background: var(--p-shape);
+    }
+
+    .spread--2 .poster::before {
+      top: auto;
+      right: -110px;
+      bottom: -150px;
+      width: 320px;
+      height: 320px;
+    }
+
+    .spread--3 .poster::before {
+      top: -92px;
+      right: -6px;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      content: "♥";
+      color: var(--p-shape);
+      background: none;
+      font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", sans-serif;
+      font-size: 21rem;
+      line-height: 1;
+    }
+
+    .spread--4 .poster::before {
+      top: 13%;
+      right: auto;
+      left: -30%;
+      width: 160%;
+      height: 74px;
+      border-radius: 0;
+      transform: rotate(-11deg);
+    }
+
+    .poster small { position: relative; font-size: 0.9rem; font-weight: 800; }
+
+    .poster b {
+      position: relative;
+      font-family: var(--display);
+      font-size: clamp(8rem, 13vw, 13rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+
+    .cards {
+      grid-column: 5 / 9;
+      display: grid;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .cards div {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px 22px 18px;
+      border-radius: 24px;
+    }
+
+    .cards div:nth-child(1) { color: var(--on2); background: var(--c2); }
+    .cards div:nth-child(2) { color: var(--on3); background: var(--c3); }
+    .cards div:nth-child(3) { color: var(--ink); background: #ffffff; }
+
+    .cards strong { font-family: var(--display); font-size: 1.9rem; font-weight: 800; line-height: 1.1; }
+    .cards span { margin-top: 4px; font-size: 0.9rem; font-weight: 500; }
+
+    .sheet {
+      grid-column: 9 / 13;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 22px 24px 12px;
+      border-radius: 28px;
+      color: var(--ink);
+      background: #ffffff;
+    }
+
+    .sheet-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .sheet-brand { font-family: var(--display); font-size: 1.4rem; font-weight: 800; }
+    .sheet-brand b { color: var(--link); font-weight: 800; }
+
+    .sheet a {
+      color: var(--link);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .sheet h3 {
+      margin: 10px 0 0;
+      font-family: var(--display);
+      font-size: 1.75rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .sheet p { margin: -6px 0 2px; font-size: 0.9rem; font-weight: 500; line-height: 1.75; opacity: 0.74; }
+
+    .sheet-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .btn {
+      padding: 11px 18px;
+      border: 2px solid var(--btn-bg);
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn--solid { color: var(--btn-fg); background: var(--btn-bg); }
+    .btn--quiet { color: var(--ink); background: transparent; }
+    .btn:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+
+    .quotes { margin: auto 0 0; padding: 0; list-style: none; font-size: 0.9rem; font-weight: 500; }
+
+    .quotes li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(21, 21, 28, 0.14);
+    }
+
+    .quotes small { opacity: 0.62; font-size: 0.76rem; }
+    .quotes .up { color: #d03a2f; font-weight: 800; }
+    .quotes .down { color: #1a8a55; font-weight: 800; }
+
+    .flag {
+      padding: 4px 11px;
+      border-radius: 999px;
+      color: var(--flag-text);
+      background: var(--flag-bg);
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    /* 文字搭配规范 + 结论 */
+    .pairs {
+      grid-column: 1 / 7;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pairs li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 18px;
+      border: 2px solid var(--on1);
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .pairs em { font-size: 0.82rem; font-style: normal; font-weight: 700; }
+    .pairs .no span { text-decoration: line-through; text-decoration-thickness: 2px; }
+
+    .verdict { grid-column: 7 / 13; min-width: 0; }
+    .verdict p { margin: 0; font-size: 1.02rem; font-weight: 500; line-height: 1.85; }
+    .verdict p + p { margin-top: 12px; }
+    .verdict strong { font-weight: 900; }
+
+    @media (max-width: 1080px) {
+      .intro { grid-template-columns: 1fr; gap: 18px; padding: 40px 24px 44px; }
+      .spread { padding: 48px 24px 56px; }
+      .title, .spec, .poster, .cards, .sheet, .pairs, .verdict { grid-column: 1 / -1; }
+      .poster { min-height: 340px; }
+    }
+
+    @media (max-width: 560px) {
+      .top { padding: 8px 12px; }
+      .top > span { display: none; }
+      .pairs { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <span>YY 系列视觉手册　第一章</span>
+    <nav aria-label="四组候选">
+      <a href="#s1"><i style="--a:#ffd60a;--b:#15151c;--c:#2438ff"></i>双黄</a>
+      <a href="#s2"><i style="--a:#1f2cff;--b:#ff4a1c;--c:#ffc4dc"></i>电光</a>
+      <a href="#s3"><i style="--a:#ffb8d9;--b:#ff4124;--c:#06241a"></i>牌桌</a>
+      <a href="#s4"><i style="--a:#4a22e8;--b:#c9f53b;--c:#170f2e"></i>青柠</a>
+    </nav>
+  </div>
+
+  <header class="intro">
+    <h1>标准色候选<br>张扬版</h1>
+    <p>这一版不从现有站点里找颜色，四组都是新的，每组一整屏。60 / 30 / 10 说的是首页、导航、封面这些露脸的地方；长文和数据区一律回到白底，所以每组都配了一张白底卡片，看按钮、链接和红涨绿跌放上去会不会打架。字体换成了更重的，只为撑住气质，正式选字体在后面一章；“YY”仍是占位，不是标识设计。</p>
+  </header>
+
+  <main>
+    <!-- 方案一 双黄 -->
+    <section class="spread" id="s1" aria-labelledby="t1">
+      <div class="title">
+        <p class="title-no">方案一 <span class="pick">我的推荐</span></p>
+        <h2 id="t1">双黄</h2>
+        <p class="title-trio">明黄 × 墨 × 钴蓝</p>
+        <p class="title-idea">YY 的 Y，就是印刷四色 CMYK 里的那个 Y：黄。把名字直接变成颜色，两个 Y 就是双份的黄。</p>
+      </div>
+
+      <div class="spec">
+        <div class="ratio" aria-label="使用比例"><span>60</span><span>30</span><span>10</span></div>
+        <ul class="chips">
+          <li><i style="--sw:#ffd60a"></i><span><strong>明黄</strong><small>主色：整页铺底、标识</small></span><code>#FFD60A<span>255 214 10</span></code></li>
+          <li><i style="--sw:#15151c"></i><span><strong>墨</strong><small>辅助色：文字、深色块、按钮</small></span><code>#15151C<span>21 21 28</span></code></li>
+          <li><i style="--sw:#2438ff"></i><span><strong>钴蓝</strong><small>点缀色：链接、提示、小色块</small></span><code>#2438FF<span>36 56 255</span></code></li>
+        </ul>
+      </div>
+
+      <div class="poster"><small>leonyeung.top</small><b>YY</b></div>
+
+      <div class="cards">
+        <div><strong>FinanceYY</strong><span>公司深度研究工作台</span></div>
+        <div><strong>PokerYY</strong><span>德州扑克网站</span></div>
+        <div><strong>NewsYY</strong><span>个性化每日晨报</span></div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-bar"><span class="sheet-brand">Finance<b>YY</b></span><a href="#s1">查看研究方法</a></div>
+        <h3>先搞懂生意，最后才谈价格</h3>
+        <p>结论必须能在半年后复查。</p>
+        <div class="sheet-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <ul class="pairs" aria-label="文字搭配规范">
+        <li style="--bg:#ffd60a;--fg:#15151c"><span>黄底墨字</span><em>12.9 可用</em></li>
+        <li style="--bg:#15151c;--fg:#ffd60a"><span>墨底黄字</span><em>12.9 可用</em></li>
+        <li style="--bg:#2438ff;--fg:#ffffff"><span>蓝底白字</span><em>6.8 可用</em></li>
+        <li class="no" style="--bg:#ffd60a;--fg:#ffffff"><span>黄底白字</span><em>1.4 禁用</em></li>
+      </ul>
+
+      <div class="verdict">
+        <p><strong>最容易被记住，而且有来由。</strong>黄和墨的对比度是四组里最高的，字怎么放都清楚；黄、墨、蓝离红涨绿跌都远，行情页上不打架。别人问“为什么是黄色”，一句话就能讲明白。</p>
+        <p><strong>代价：</strong>黄底不适合读长文，研究笔记和晨报正文必须回到白底；黄配黑容易让人想到警示牌和外卖平台，要靠蓝色和版式把它拉开。</p>
+      </div>
+    </section>
+
+    <!-- 方案二 电光 -->
+    <section class="spread spread--2" id="s2" aria-labelledby="t2">
+      <div class="title">
+        <p class="title-no">方案二</p>
+        <h2 id="t2">电光</h2>
+        <p class="title-trio">电光蓝 × 朱红 × 樱粉</p>
+        <p class="title-idea">夜里的霓虹招牌：整页泡在一种亮得不讲理的蓝里，朱红和粉从里面往外跳。</p>
+      </div>
+
+      <div class="spec">
+        <div class="ratio" aria-label="使用比例"><span>60</span><span>30</span><span>10</span></div>
+        <ul class="chips">
+          <li><i style="--sw:#1f2cff"></i><span><strong>电光蓝</strong><small>主色：整页铺底、按钮、链接</small></span><code>#1F2CFF<span>31 44 255</span></code></li>
+          <li><i style="--sw:#ff4a1c"></i><span><strong>朱红</strong><small>辅助色：大色块、图形</small></span><code>#FF4A1C<span>255 74 28</span></code></li>
+          <li><i style="--sw:#ffc4dc"></i><span><strong>樱粉</strong><small>点缀色：浅色块、蓝底上的字</small></span><code>#FFC4DC<span>255 196 220</span></code></li>
+        </ul>
+      </div>
+
+      <div class="poster"><small>leonyeung.top</small><b>YY</b></div>
+
+      <div class="cards">
+        <div><strong>FinanceYY</strong><span>公司深度研究工作台</span></div>
+        <div><strong>PokerYY</strong><span>德州扑克网站</span></div>
+        <div><strong>NewsYY</strong><span>个性化每日晨报</span></div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-bar"><span class="sheet-brand">Finance<b>YY</b></span><a href="#s2">查看研究方法</a></div>
+        <h3>先搞懂生意，最后才谈价格</h3>
+        <p>结论必须能在半年后复查。</p>
+        <div class="sheet-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <ul class="pairs" aria-label="文字搭配规范">
+        <li style="--bg:#1f2cff;--fg:#ffffff"><span>蓝底白字</span><em>7.3 可用</em></li>
+        <li style="--bg:#ffc4dc;--fg:#1f2cff"><span>粉底蓝字</span><em>5.0 可用</em></li>
+        <li style="--bg:#ff4a1c;--fg:#15151c"><span>朱红底墨字</span><em>5.4 可用</em></li>
+        <li class="no" style="--bg:#ff4a1c;--fg:#ffffff"><span>朱红底白字</span><em>3.4 禁用</em></li>
+      </ul>
+
+      <div class="verdict">
+        <p><strong>冲击力最强，第一眼就醒。</strong>蓝底白字、粉底蓝字都好读；蓝色做按钮和链接在白底上也站得住，工具类站点直接能用。</p>
+        <p><strong>代价：</strong>朱红和“红涨”几乎同色，在 FinanceYY 里只能当图形，不能碰数字；朱红直接压在蓝上对比只有 2.2，会晃眼，两者之间要隔一层粉或白。整页蓝底看久了累。</p>
+      </div>
+    </section>
+
+    <!-- 方案三 牌桌 -->
+    <section class="spread spread--3" id="s3" aria-labelledby="t3">
+      <div class="title">
+        <p class="title-no">方案三</p>
+        <h2 id="t3">牌桌</h2>
+        <p class="title-trio">泡泡粉 × 番茄红 × 墨绿</p>
+        <p class="title-idea">红桃、绿绒桌布，再铺一层不讲道理的粉。从 PokerYY 和血染钟楼助手里长出来的颜色。</p>
+      </div>
+
+      <div class="spec">
+        <div class="ratio" aria-label="使用比例"><span>60</span><span>30</span><span>10</span></div>
+        <ul class="chips">
+          <li><i style="--sw:#ffb8d9"></i><span><strong>泡泡粉</strong><small>主色：整页铺底</small></span><code>#FFB8D9<span>255 184 217</span></code></li>
+          <li><i style="--sw:#ff4124"></i><span><strong>番茄红</strong><small>辅助色：大色块、图形</small></span><code>#FF4124<span>255 65 36</span></code></li>
+          <li><i style="--sw:#06241a"></i><span><strong>墨绿</strong><small>深色：文字、按钮、深色块</small></span><code>#06241A<span>6 36 26</span></code></li>
+        </ul>
+      </div>
+
+      <div class="poster"><small>leonyeung.top</small><b>YY</b></div>
+
+      <div class="cards">
+        <div><strong>FinanceYY</strong><span>公司深度研究工作台</span></div>
+        <div><strong>PokerYY</strong><span>德州扑克网站</span></div>
+        <div><strong>NewsYY</strong><span>个性化每日晨报</span></div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-bar"><span class="sheet-brand">Finance<b>YY</b></span><a href="#s3">查看研究方法</a></div>
+        <h3>先搞懂生意，最后才谈价格</h3>
+        <p>结论必须能在半年后复查。</p>
+        <div class="sheet-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <ul class="pairs" aria-label="文字搭配规范">
+        <li style="--bg:#ffb8d9;--fg:#06241a"><span>粉底墨绿字</span><em>10.3 可用</em></li>
+        <li style="--bg:#06241a;--fg:#ffb8d9"><span>墨绿底粉字</span><em>10.3 可用</em></li>
+        <li style="--bg:#ff4124;--fg:#06241a"><span>番茄底墨绿字</span><em>4.7 可用</em></li>
+        <li class="no" style="--bg:#ff4124;--fg:#ffffff"><span>番茄底白字</span><em>3.5 禁用</em></li>
+      </ul>
+
+      <div class="verdict">
+        <p><strong>最有性格，四组里最不可能和别人撞。</strong>粉和墨绿的搭配很耐看，墨绿做文字和按钮比纯黑有味道；放在扑克、桌游、世界杯这些“玩”的站点上是天作之合。</p>
+        <p><strong>代价：</strong>番茄红就是“红涨”和报错的颜色，白底卡片里链接、涨幅挤在一起，FinanceYY 是四组里最难用的；整页粉色放到 VPN、编程学习这类站点，气质可能不对。</p>
+      </div>
+    </section>
+
+    <!-- 方案四 青柠 -->
+    <section class="spread spread--4" id="s4" aria-labelledby="t4">
+      <div class="title">
+        <p class="title-no">方案四</p>
+        <h2 id="t4">青柠</h2>
+        <p class="title-trio">靛紫 × 青柠 × 墨紫</p>
+        <p class="title-idea">游戏厅和荧光笔：紫底上的青柠像自己在发光，一看就是年轻人做的东西。</p>
+      </div>
+
+      <div class="spec">
+        <div class="ratio" aria-label="使用比例"><span>60</span><span>30</span><span>10</span></div>
+        <ul class="chips">
+          <li><i style="--sw:#4a22e8"></i><span><strong>靛紫</strong><small>主色：整页铺底、按钮、链接</small></span><code>#4A22E8<span>74 34 232</span></code></li>
+          <li><i style="--sw:#c9f53b"></i><span><strong>青柠</strong><small>辅助色：大色块、强调</small></span><code>#C9F53B<span>201 245 59</span></code></li>
+          <li><i style="--sw:#170f2e"></i><span><strong>墨紫</strong><small>深色：文字、深色块</small></span><code>#170F2E<span>23 15 46</span></code></li>
+        </ul>
+      </div>
+
+      <div class="poster"><small>leonyeung.top</small><b>YY</b></div>
+
+      <div class="cards">
+        <div><strong>FinanceYY</strong><span>公司深度研究工作台</span></div>
+        <div><strong>PokerYY</strong><span>德州扑克网站</span></div>
+        <div><strong>NewsYY</strong><span>个性化每日晨报</span></div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-bar"><span class="sheet-brand">Finance<b>YY</b></span><a href="#s4">查看研究方法</a></div>
+        <h3>先搞懂生意，最后才谈价格</h3>
+        <p>结论必须能在半年后复查。</p>
+        <div class="sheet-actions">
+          <button class="btn btn--solid" type="button">打开关注清单</button>
+          <button class="btn btn--quiet" type="button">订阅晨报</button>
+        </div>
+        <ul class="quotes">
+          <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+          <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+          <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+        </ul>
+      </div>
+
+      <ul class="pairs" aria-label="文字搭配规范">
+        <li style="--bg:#4a22e8;--fg:#ffffff"><span>紫底白字</span><em>7.8 可用</em></li>
+        <li style="--bg:#c9f53b;--fg:#170f2e"><span>青柠底墨紫字</span><em>14.5 可用</em></li>
+        <li style="--bg:#4a22e8;--fg:#c9f53b"><span>紫底青柠字</span><em>6.2 可用</em></li>
+        <li class="no" style="--bg:#c9f53b;--fg:#ffffff"><span>青柠底白字</span><em>1.3 禁用</em></li>
+      </ul>
+
+      <div class="verdict">
+        <p><strong>最年轻，最像“在玩”。</strong>三种搭配对比度都很高，紫色做按钮和链接在白底上也清楚；游戏、扑克、编程这几个站穿上它最合身。</p>
+        <p><strong>代价：</strong>你个人站的设计文档里写过要避开“紫色科技渐变”。这里是纯色不是渐变，但紫色本身你接不接受，得你来判断。青柠离“绿跌”不远，只能做色块；放到研究和晨报这类严肃内容上会显得轻。</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

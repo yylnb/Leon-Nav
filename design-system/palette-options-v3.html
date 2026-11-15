@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>YY 系列视觉手册 · 标准色候选（第三版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Manrope:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --display: "Bricolage Grotesque", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      --page-ink: #17161a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--page-ink);
+      background: #ffffff;
+      font-family: "Manrope", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 28px;
+      border-bottom: 1px solid rgba(23, 22, 26, 0.12);
+      background: #ffffff;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .top nav { display: flex; flex-wrap: wrap; gap: 2px; }
+
+    .top a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top a:hover { background: rgba(23, 22, 26, 0.08); }
+    .top a:focus-visible, .rack a:focus-visible { outline: 3px solid var(--page-ink); outline-offset: 3px; }
+
+    .top i {
+      width: 24px;
+      height: 12px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--a) 0 34%, var(--b) 34% 67%, var(--c) 67%);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      align-items: end;
+      gap: 48px;
+      padding: 60px 56px 44px;
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 5.4vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .intro p {
+      max-width: 46rem;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.85;
+      opacity: 0.78;
+    }
+
+    /* 六张色卡：一眼比较，点了跳到整屏 */
+    .rack {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+      padding: 0 56px 72px;
+    }
+
+    .rack a {
+      display: grid;
+      grid-template-rows: 6fr 3fr 1fr;
+      height: 360px;
+      overflow: hidden;
+      border-radius: 22px;
+      text-decoration: none;
+      transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .rack a:hover { transform: translateY(-8px); }
+
+    .rack span { display: flex; padding: 14px 16px; font-family: var(--display); font-weight: 800; }
+
+    .rack span:first-child {
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: clamp(1.3rem, 2vw, 1.9rem);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .rack small { font-size: 0.9rem; font-weight: 800; }
+    .rack span:not(:first-child) { align-items: flex-end; font-size: 0.86rem; }
+
+    /* 跨页：每组颜色一整屏，所有元素只读这一组变量 */
+    .spread {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 36px 24px;
+      padding: 76px 56px 88px;
+      color: var(--on1);
+      background: var(--c1);
+      scroll-margin-top: 48px;
+    }
+
+    .title { grid-column: 1 / 8; min-width: 0; }
+
+    .title-no {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 6px;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .pick {
+      padding: 5px 13px;
+      border-radius: 999px;
+      color: var(--c1);
+      background: var(--on1);
+      font-family: "Manrope", "Noto Sans SC", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .title h2 {
+      margin: 0 0 0 -0.04em;
+      font-family: var(--display);
+      font-size: clamp(4rem, 11vw, 11rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .title-trio {
+      margin: 22px 0 0;
+      font-family: var(--display);
+      font-size: clamp(1.3rem, 2.2vw, 2rem);
+      font-weight: 800;
+    }
+
+    .title-idea {
+      max-width: 36rem;
+      margin: 12px 0 0;
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.85;
+    }
+
+    .spec { grid-column: 8 / 13; align-self: end; min-width: 0; }
+
+    .ratio {
+      display: grid;
+      grid-template-columns: 6fr 3fr 1fr;
+      height: 76px;
+      border: 3px solid var(--on1);
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .ratio span { display: flex; align-items: flex-end; padding: 6px 10px; }
+    .ratio span:nth-child(1) { color: var(--on1); background: var(--c1); }
+    .ratio span:nth-child(2) { color: var(--on2); background: var(--c2); }
+    .ratio span:nth-child(3) { color: var(--on3); background: var(--c3); }
+
+    .chips { margin: 14px 0 0; padding: 0; list-style: none; }
+
+    .chips li {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 2px solid var(--on1);
+    }
+
+    .chips i { width: 44px; height: 44px; border: 2px solid var(--on1); background: var(--sw); }
+    .chips strong { display: block; font-size: 1.05rem; font-weight: 900; }
+    .chips small { font-size: 0.8rem; font-weight: 500; }
+
+    .chips code {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.35;
+      text-align: right;
+    }
+
+    .chips code span { display: block; font-size: 0.8rem; font-weight: 500; }
+
+    .poster, .cards, .sheet { min-width: 0; min-height: 420px; }
+
+    /* 海报：一个裁掉的大 Y，一块图形，一行小字 */
+    .poster {
+      position: relative;
+      grid-column: 1 / 5;
+      overflow: hidden;
+      padding: 24px 26px;
+      border-radius: 28px;
+      color: var(--p-fg);
+      background: var(--p-bg);
+    }
+
+    .poster small { position: relative; z-index: 2; font-size: 0.9rem; font-weight: 800; }
+
+    .poster b {
+      position: absolute;
+      bottom: -0.2em;
+      left: -0.05em;
+      z-index: 1;
+      font-family: var(--display);
+      font-size: clamp(19rem, 28vw, 30rem);
+      font-weight: 800;
+      line-height: 0.8;
+    }
+
+    .poster i { position: absolute; background: var(--p-shape); }
+    .poster--arch i { right: 7%; bottom: 0; width: 30%; height: 62%; border-radius: 999px 999px 0 0; }
+    .poster--circle i { top: 12%; right: 8%; width: 34%; aspect-ratio: 1; border-radius: 50%; }
+    .poster--sun i { right: -14%; bottom: -24%; width: 58%; aspect-ratio: 1; border-radius: 50%; }
+
+    .cards {
+      grid-column: 5 / 9;
+      display: grid;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .cards div {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px 22px 18px;
+      border-radius: 24px;
+    }
+
+    .cards div:nth-child(1) { color: var(--on2); background: var(--c2); }
+    .cards div:nth-child(2) { color: var(--on3); background: var(--c3); }
+    .cards div:nth-child(3) { color: var(--ink); background: #ffffff; }
+    .cards strong { font-family: var(--display); font-size: 1.9rem; font-weight: 800; line-height: 1.1; }
+    .cards span { margin-top: 4px; font-size: 0.9rem; font-weight: 500; }
+
+    .sheet {
+      grid-column: 9 / 13;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 22px 24px 12px;
+      border-radius: 28px;
+      color: var(--ink);
+      background: #ffffff;
+    }
+
+    .sheet-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .sheet-brand { font-family: var(--display); font-size: 1.4rem; font-weight: 800; }
+    .sheet-brand b { color: var(--link); font-weight: 800; }
+
+    .sheet a {
+      color: var(--link);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .sheet h3 {
+      margin: 10px 0 0;
+      font-family: var(--display);
+      font-size: 1.75rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .sheet p { margin: -6px 0 2px; font-size: 0.9rem; font-weight: 500; line-height: 1.75; opacity: 0.74; }
+    .sheet-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .btn {
+      padding: 11px 18px;
+      border: 2px solid var(--btn-bg);
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn--solid { color: var(--btn-fg); background: var(--btn-bg); }
+    .btn--quiet { color: var(--ink); background: transparent; }
+    .btn:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+
+    .quotes { margin: auto 0 0; padding: 0; list-style: none; font-size: 0.9rem; font-weight: 500; }
+
+    .quotes li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(23, 22, 26, 0.14);
+    }
+
+    .quotes small { opacity: 0.62; font-size: 0.76rem; }
+    .quotes .up { color: #d03a2f; font-weight: 800; }
+    .quotes .down { color: #1a8a55; font-weight: 800; }
+
+    .flag {
+      padding: 4px 11px;
+      border-radius: 999px;
+      color: var(--flag-text);
+      background: var(--flag-bg);
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .pairs {
+      grid-column: 1 / 7;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pairs li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 18px;
+      border: 2px solid var(--on1);
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .pairs em { flex: 0 0 auto; font-size: 0.82rem; font-style: normal; font-weight: 700; }
+    .pairs .no span { text-decoration: line-through; text-decoration-thickness: 2px; }
+
+    .verdict { grid-column: 7 / 13; min-width: 0; }
+    .verdict p { margin: 0; font-size: 1.02rem; font-weight: 500; line-height: 1.85; }
+    .verdict p + p { margin-top: 12px; }
+    .verdict strong { font-weight: 900; }
+
+    @media (max-width: 1080px) {
+      .intro { grid-template-columns: 1fr; gap: 18px; padding: 40px 24px 32px; }
+      .rack { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0 24px 48px; }
+      .rack a { height: 260px; }
+      .spread { padding: 48px 24px 56px; }
+      .title, .spec, .poster, .cards, .sheet, .pairs, .verdict { grid-column: 1 / -1; }
+      .poster { min-height: 360px; }
+    }
+
+    @media (max-width: 560px) {
+      .top { padding: 8px 12px; }
+      .top > span { display: none; }
+      .rack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pairs { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .rack a { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <span>YY 系列视觉手册　第一章</span>
+    <nav id="jump" aria-label="六组候选"></nav>
+  </div>
+
+  <header class="intro">
+    <h1>标准色候选<br>第三版</h1>
+    <p>上一版气氛对了，但用的都是纯黄、纯蓝、纯红，张扬却不够讲究。这一版换了取色的办法：每组都是一个浅色、一个艳色、一个深色，明度拉开，所以敢撞色也不脏；深色不用纯黑，改用可可棕、酒红、茄紫这类带颜色的深色。先看下面六张色卡，点任何一张跳到它的整屏。对比度数字由页面自动计算。</p>
+  </header>
+
+  <nav class="rack" id="rack" aria-label="六组色卡"></nav>
+  <main id="spreads"></main>
+
+  <script>
+    // 每组：三个颜色（按 60 / 30 / 10 排）+ 海报、白底卡片的取色 + 文字搭配检查项
+    const schemes = [
+      {
+        id: "s1", no: "一", name: "黄油可可", pick: true,
+        trio: "黄油黄 × 可可棕 × 钴蓝",
+        idea: "还是“YY 的 Y 就是黄”，但换成黄油的黄：软一点，贵一点。黑换成可可棕，再用一小块钴蓝提神。",
+        colors: [
+          { name: "黄油黄", hex: "#FFE27A", on: "#3A1C10", role: "主色：整页铺底、标识" },
+          { name: "可可棕", hex: "#3A1C10", on: "#FFE27A", role: "深色：文字、深色块、按钮" },
+          { name: "钴蓝", hex: "#2443FF", on: "#FFFFFF", role: "点缀色：链接、提示、小色块" }
+        ],
+        poster: { kind: "arch", bg: "#3A1C10", fg: "#FFE27A", shape: "#2443FF" },
+        sheet: { ink: "#3A1C10", link: "#2443FF", btnBg: "#3A1C10", btnFg: "#FFE27A", flagBg: "#FFF3C4", flagText: "#5C4A00" },
+        pairs: [["#FFE27A", "#3A1C10", "黄油底可可字"], ["#3A1C10", "#FFE27A", "可可底黄油字"], ["#2443FF", "#FFFFFF", "钴蓝底白字"], ["#FFE27A", "#FFFFFF", "黄油底白字"]],
+        good: "<strong>张扬但不吵，最耐看。</strong>黄油黄铺满整页也不刺眼，可可棕比纯黑暖、有质感；黄、棕、蓝离红涨绿跌都远，八个站都能穿。“YY 的 Y 是黄”这个说法也保住了。",
+        cost: "<strong>代价：</strong>黄油黄偏浅，上面只能放可可棕的字；钴蓝和可可棕不能直接叠在一起，中间要隔黄或白。"
+      },
+      {
+        id: "s2", no: "二", name: "樱桃汽水",
+        trio: "雾蓝 × 酒红 × 番茄红",
+        idea: "婴儿蓝配酒红，是这几年时装里常见的一对：一个冷而轻，一个暖而沉。番茄红只出现一点点，像杯沿上那颗樱桃。",
+        colors: [
+          { name: "雾蓝", hex: "#BFD8FF", on: "#45091A", role: "主色：整页铺底" },
+          { name: "酒红", hex: "#45091A", on: "#BFD8FF", role: "深色：文字、深色块、按钮" },
+          { name: "番茄红", hex: "#FF3D1F", on: "#45091A", role: "点缀色：图形、小色块" }
+        ],
+        poster: { kind: "circle", bg: "#45091A", fg: "#BFD8FF", shape: "#FF3D1F" },
+        sheet: { ink: "#45091A", link: "#45091A", btnBg: "#45091A", btnFg: "#BFD8FF", flagBg: "#E3EEFF", flagText: "#45091A" },
+        pairs: [["#BFD8FF", "#45091A", "雾蓝底酒红字"], ["#45091A", "#BFD8FF", "酒红底雾蓝字"], ["#FF3D1F", "#45091A", "番茄底酒红字"], ["#FF3D1F", "#FFFFFF", "番茄底白字"]],
+        good: "<strong>六组里最“时装”的一组。</strong>雾蓝做底很干净，酒红当文字和深色块比黑色有情绪；一冷一暖互相压得住，读起来也清楚。",
+        cost: "<strong>代价：</strong>番茄红就是“红涨”和报错的颜色，只能做图形，不能碰数字；酒红和正文是同一个颜色，白底上的链接要靠下划线才认得出。"
+      },
+      {
+        id: "s3", no: "三", name: "网球场",
+        trio: "草绿 × 丁香紫 × 墨绿",
+        idea: "草地球场的绿，配一块丁香紫。运动感和一点甜放在一起，WorldcupYY 可以直接穿。",
+        colors: [
+          { name: "草绿", hex: "#19A84B", on: "#0A2414", role: "主色：整页铺底" },
+          { name: "丁香紫", hex: "#DCC8FF", on: "#0A2414", role: "辅助色：浅色块、强调" },
+          { name: "墨绿", hex: "#0A2414", on: "#DCC8FF", role: "深色：文字、深色块、按钮" }
+        ],
+        poster: { kind: "circle", bg: "#0A2414", fg: "#DCC8FF", shape: "#19A84B" },
+        sheet: { ink: "#0A2414", link: "#0E7A35", btnBg: "#0A2414", btnFg: "#DCC8FF", flagBg: "#EFE6FF", flagText: "#3B1F7A" },
+        pairs: [["#19A84B", "#0A2414", "草绿底墨绿字"], ["#DCC8FF", "#0A2414", "丁香底墨绿字"], ["#0A2414", "#DCC8FF", "墨绿底丁香字"], ["#19A84B", "#FFFFFF", "草绿底白字"]],
+        good: "<strong>最鲜活，最有运动感。</strong>绿配紫少见而且好认，丁香紫把草绿的土气洗掉了；墨绿当文字很稳。",
+        cost: "<strong>代价：</strong>主色是绿，在 FinanceYY 里会和“绿跌”混在一起；草绿底上只能放墨绿字；草绿和丁香紫紧挨着时对比弱，中间要隔墨绿或白。"
+      },
+      {
+        id: "s4", no: "四", name: "落日",
+        trio: "柿橙 × 茄紫 × 蜜桃粉",
+        idea: "傍晚六点的天：橙、粉，和压下来的紫。热，但不是红。",
+        colors: [
+          { name: "柿橙", hex: "#FF5C1A", on: "#2E0F38", role: "主色：整页铺底" },
+          { name: "茄紫", hex: "#2E0F38", on: "#FFC9DD", role: "深色：文字、深色块、按钮" },
+          { name: "蜜桃粉", hex: "#FFC9DD", on: "#2E0F38", role: "点缀色：浅色块" }
+        ],
+        poster: { kind: "sun", bg: "#2E0F38", fg: "#FFC9DD", shape: "#FF5C1A" },
+        sheet: { ink: "#2E0F38", link: "#B83A00", btnBg: "#2E0F38", btnFg: "#FFC9DD", flagBg: "#FFE3EC", flagText: "#2E0F38" },
+        pairs: [["#FF5C1A", "#2E0F38", "柿橙底茄紫字"], ["#2E0F38", "#FFC9DD", "茄紫底粉字"], ["#FFC9DD", "#2E0F38", "粉底茄紫字"], ["#FF5C1A", "#FFFFFF", "柿橙底白字"]],
+        good: "<strong>最热烈，最有度假感。</strong>柿橙铺底非常抢眼，茄紫当文字比黑色柔和；橙不是红，放在行情页上比番茄红安全。",
+        cost: "<strong>代价：</strong>整页橙色看久了累，最不适合要长时间停留的工具页；橙底上只能放茄紫字；白底上的橙色链接和“红涨”还是有点近。"
+      },
+      {
+        id: "s5", no: "五", name: "蓝丝绒",
+        trio: "钴蓝 × 浅粉 × 巧克力",
+        idea: "上一版“电光”的成熟版：蓝收了一点，朱红换成巧克力，粉变浅。和方案一是近亲，区别是蓝当主角。",
+        colors: [
+          { name: "钴蓝", hex: "#1E3AE0", on: "#FFFFFF", role: "主色：整页铺底、按钮、链接" },
+          { name: "浅粉", hex: "#FFD3E0", on: "#1E3AE0", role: "辅助色：浅色块、蓝底上的字" },
+          { name: "巧克力", hex: "#3A1C10", on: "#FFD3E0", role: "深色：文字、深色块" }
+        ],
+        poster: { kind: "arch", bg: "#FFD3E0", fg: "#1E3AE0", shape: "#3A1C10" },
+        sheet: { ink: "#3A1C10", link: "#1E3AE0", btnBg: "#1E3AE0", btnFg: "#FFFFFF", flagBg: "#FFE6EE", flagText: "#3A1C10" },
+        pairs: [["#1E3AE0", "#FFFFFF", "钴蓝底白字"], ["#1E3AE0", "#FFD3E0", "钴蓝底粉字"], ["#FFD3E0", "#3A1C10", "粉底巧克力字"], ["#1E3AE0", "#3A1C10", "钴蓝底巧克力字"]],
+        good: "<strong>最稳的张扬。</strong>蓝底白字、蓝底粉字都清楚，蓝色做按钮和链接在白底上也站得住；没有一个颜色和红涨绿跌冲突。",
+        cost: "<strong>代价：</strong>巧克力不能直接压在钴蓝上，只能配粉或白；整页深蓝看久了累；蓝色当主角，辨识度不如其他几组。"
+      },
+      {
+        id: "s6", no: "六", name: "开心果",
+        trio: "开心果绿 × 桃红 × 深李",
+        idea: "冰淇淋柜里的三个口味：开心果、覆盆子、黑李子。甜，但颜色是冷静的。",
+        colors: [
+          { name: "开心果绿", hex: "#CFE595", on: "#36102A", role: "主色：整页铺底" },
+          { name: "桃红", hex: "#FF3D93", on: "#36102A", role: "辅助色：大色块、强调" },
+          { name: "深李", hex: "#36102A", on: "#CFE595", role: "深色：文字、深色块、按钮" }
+        ],
+        poster: { kind: "sun", bg: "#36102A", fg: "#CFE595", shape: "#FF3D93" },
+        sheet: { ink: "#36102A", link: "#C40B66", btnBg: "#36102A", btnFg: "#CFE595", flagBg: "#FFE0EE", flagText: "#8F0A4B" },
+        pairs: [["#CFE595", "#36102A", "开心果底深李字"], ["#36102A", "#CFE595", "深李底开心果字"], ["#FF3D93", "#36102A", "桃红底深李字"], ["#FF3D93", "#FFFFFF", "桃红底白字"]],
+        good: "<strong>最清新，也最少见。</strong>开心果绿很浅，铺满整页不累；桃红一出现就是焦点；深李当文字和按钮有性格。",
+        cost: "<strong>代价：</strong>气质偏甜，放到 VPN、研究这类严肃站点要收着用；桃红和开心果绿紧挨着时对比弱；桃红在行情页上离“红涨”不算远。"
+      }
+    ];
+
+    const channels = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    const luminance = (hex) => {
+      const [r, g, b] = channels(hex).map((v) => {
+        const s = v / 255;
+        return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const contrast = (a, b) => {
+      const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+      return (hi + 0.05) / (lo + 0.05);
+    };
+    const grade = (ratio) => (ratio >= 4.5 ? "可用" : ratio >= 3 ? "仅限大字" : "禁用");
+
+    const swatch = (s) => `--a:${s.colors[0].hex};--b:${s.colors[1].hex};--c:${s.colors[2].hex}`;
+
+    document.getElementById("jump").innerHTML = schemes
+      .map((s) => `<a href="#${s.id}"><i style="${swatch(s)}"></i>${s.name}</a>`)
+      .join("");
+
+    document.getElementById("rack").innerHTML = schemes
+      .map((s) => {
+        const [c1, c2, c3] = s.colors;
+        return `<a href="#${s.id}" aria-label="方案${s.no} ${s.name}：${s.trio}">
+          <span style="background:${c1.hex};color:${c1.on}"><small>方案${s.no}${s.pick ? "　我的推荐" : ""}</small>${s.name}</span>
+          <span style="background:${c2.hex};color:${c2.on}">${c2.name}</span>
+          <span style="background:${c3.hex};color:${c3.on}">${c3.name}</span>
+        </a>`;
+      })
+      .join("");
+
+    document.getElementById("spreads").innerHTML = schemes
+      .map((s) => {
+        const [c1, c2, c3] = s.colors;
+        const vars = [
+          `--c1:${c1.hex}`, `--on1:${c1.on}`, `--c2:${c2.hex}`, `--on2:${c2.on}`, `--c3:${c3.hex}`, `--on3:${c3.on}`,
+          `--p-bg:${s.poster.bg}`, `--p-fg:${s.poster.fg}`, `--p-shape:${s.poster.shape}`,
+          `--ink:${s.sheet.ink}`, `--link:${s.sheet.link}`, `--btn-bg:${s.sheet.btnBg}`, `--btn-fg:${s.sheet.btnFg}`,
+          `--flag-bg:${s.sheet.flagBg}`, `--flag-text:${s.sheet.flagText}`
+        ].join(";");
+
+        const chips = s.colors
+          .map((c) => `<li><i style="--sw:${c.hex}"></i><span><strong>${c.name}</strong><small>${c.role}</small></span><code>${c.hex}<span>${channels(c.hex).join(" ")}</span></code></li>`)
+          .join("");
+
+        const pairs = s.pairs
+          .map(([bg, fg, label]) => {
+            const ratio = contrast(bg, fg);
+            const verdict = grade(ratio);
+            return `<li class="${verdict === "禁用" ? "no" : ""}" style="--bg:${bg};--fg:${fg}"><span>${label}</span><em>${ratio.toFixed(1)} ${verdict}</em></li>`;
+          })
+          .join("");
+
+        return `<section class="spread" id="${s.id}" style="${vars}" aria-labelledby="${s.id}-name">
+          <div class="title">
+            <p class="title-no">方案${s.no}${s.pick ? ' <span class="pick">我的推荐</span>' : ""}</p>
+            <h2 id="${s.id}-name">${s.name}</h2>
+            <p class="title-trio">${s.trio}</p>
+            <p class="title-idea">${s.idea}</p>
+          </div>
+
+          <div class="spec">
+            <div class="ratio" aria-label="使用比例"><span>60</span><span>30</span><span>10</span></div>
+            <ul class="chips">${chips}</ul>
+          </div>
+
+          <div class="poster poster--${s.poster.kind}"><small>leonyeung.top</small><i></i><b aria-hidden="true">Y</b></div>
+
+          <div class="cards">
+            <div><strong>FinanceYY</strong><span>公司深度研究工作台</span></div>
+            <div><strong>PokerYY</strong><span>德州扑克网站</span></div>
+            <div><strong>NewsYY</strong><span>个性化每日晨报</span></div>
+          </div>
+
+          <div class="sheet">
+            <div class="sheet-bar"><span class="sheet-brand">Finance<b>YY</b></span><a href="#${s.id}">查看研究方法</a></div>
+            <h3>先搞懂生意，最后才谈价格</h3>
+            <p>结论必须能在半年后复查。</p>
+            <div class="sheet-actions">
+              <button class="btn btn--solid" type="button">打开关注清单</button>
+              <button class="btn btn--quiet" type="button">订阅晨报</button>
+            </div>
+            <ul class="quotes">
+              <li><span>英伟达 <small>NVDA</small></span><span class="up">+2.31%</span></li>
+              <li><span>腾讯控股 <small>0700.HK</small></span><span class="down">−1.02%</span></li>
+              <li><span>宁德时代 <small>300750.SZ</small></span><span class="flag">笔记已更新</span></li>
+            </ul>
+          </div>
+
+          <ul class="pairs" aria-label="文字搭配规范">${pairs}</ul>
+
+          <div class="verdict"><p>${s.good}</p><p>${s.cost}</p></div>
+        </section>`;
+      })
+      .join("");
+  </script>
+</body>
+</html>
