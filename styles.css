@@ -94,7 +94,7 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 .project-card {
   --card-bg: var(--surface);
   --card-ink: var(--cocoa);
-  --card-accent: var(--cobalt);
+  --card-accent: var(--cocoa);
   position: relative;
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -113,9 +113,6 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 }
 
 .project-card::before { position: absolute; inset: 0 0 auto; height: 6px; content: ""; background: var(--card-accent); }
-.project-card--primary { --card-bg: var(--surface); --card-accent: var(--cocoa); }
-.project-card--cocoa { --card-bg: var(--cocoa); --card-ink: var(--butter); --card-accent: var(--butter); box-shadow: 0 16px 36px rgba(58, 28, 16, .18); }
-.project-card--accent { --card-bg: var(--butter); --card-ink: var(--cocoa); --card-accent: var(--cobalt); }
 
 .project-card:nth-child(1) { animation-delay: 180ms; }
 .project-card:nth-child(2) { animation-delay: 220ms; }
@@ -130,8 +127,7 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 
 .card-top, .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .card-icon { display: grid; width: 52px; height: 52px; flex: 0 0 auto; place-items: center; border-radius: 15px; color: var(--cocoa); background: var(--card-accent); }
-.project-card--cocoa .card-icon { color: var(--cocoa); }
-.card-icon img { display: block; width: 28px; height: 28px; }
+.card-icon img { display: block; width: 28px; height: 28px; filter: brightness(0) invert(1); }
 .card-index { align-self: flex-start; color: var(--card-ink); opacity: .58; font-size: .75rem; font-weight: 900; }
 .card-copy { align-self: end; }
 .card-kicker { margin: 0 0 8px; color: var(--card-accent); font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
