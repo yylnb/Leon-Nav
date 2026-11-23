@@ -1,6 +1,6 @@
 :root {
   color-scheme: light;
-  --pink: #FF68B4;
+  --cobalt: #2443FF;
   --black: #111111;
   --surface: #FFFFFF;
   --muted: #444444;
@@ -13,15 +13,15 @@
 
 * { box-sizing: border-box; }
 
-html { min-width: 320px; scroll-behavior: smooth; background: var(--pink); }
+html { min-width: 320px; scroll-behavior: smooth; background: var(--cobalt); }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  color: var(--black);
-  background: var(--pink);
+  color: var(--surface);
+  background: var(--cobalt);
   font-family: var(--body);
   -webkit-font-smoothing: antialiased;
 }
@@ -39,7 +39,7 @@ body::before {
 
 a { color: inherit; text-decoration: none; }
 
-:where(a, button):focus-visible { outline: 3px solid var(--black); outline-offset: 4px; }
+:where(a, button):focus-visible { outline: 3px solid var(--surface); outline-offset: 4px; }
 
 .site-shell {
   display: grid;
@@ -65,17 +65,17 @@ a { color: inherit; text-decoration: none; }
 }
 
 .brand { display: inline-flex; align-items: center; gap: 11px; min-width: 0; font-family: var(--display); font-size: 1.1rem; font-weight: 800; letter-spacing: -0.035em; }
-.brand-mark { display: grid; width: 34px; height: 34px; place-items: center; color: var(--black); background: var(--pink); font-family: var(--display); font-size: 1.1rem; font-weight: 800; }
+.brand-mark { display: grid; width: 34px; height: 34px; place-items: center; color: var(--surface); background: var(--cobalt); font-family: var(--display); font-size: 1.1rem; font-weight: 800; }
 .header-label { color: var(--surface); font-size: 0.72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 
 main { align-self: center; width: 100%; padding: 54px 0 42px; }
 
 .intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 36px; animation: arrive 680ms 80ms var(--ease-out) both; }
-.eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; color: var(--black); font-size: .76rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
-.eyebrow span { width: 32px; height: 3px; background: var(--black); }
+.eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; color: var(--surface); font-size: .76rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.eyebrow span { width: 32px; height: 3px; background: var(--surface); }
 h1, h2, h3, p { overflow-wrap: anywhere; }
 h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem); font-weight: 800; line-height: .92; letter-spacing: -.075em; }
-.intro-copy { max-width: 24rem; margin: 0 0 5px; color: var(--muted); font-size: 1rem; line-height: 1.7; text-align: right; }
+.intro-copy { max-width: 24rem; margin: 0 0 5px; color: var(--surface); font-size: 1rem; line-height: 1.7; text-align: right; }
 
 .project-heading {
   display: flex;
@@ -84,12 +84,12 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
   gap: 16px;
   margin: 44px 0 18px;
   padding-bottom: 14px;
-  border-bottom: 2px solid var(--black);
+  border-bottom: 2px solid var(--surface);
   animation: arrive 680ms 140ms var(--ease-out) both;
 }
 
 .project-heading h2 { margin: 0; font-size: .88rem; font-weight: 700; letter-spacing: .04em; }
-.project-count { color: var(--muted); font-size: .74rem; font-weight: 700; }
+.project-count { color: var(--surface); font-size: .74rem; font-weight: 700; }
 
 .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 
@@ -121,7 +121,7 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 
 .card-index {
   justify-self: end;
-  color: var(--pink);
+  color: var(--cobalt);
   font-family: var(--display);
   font-size: 6rem;
   font-weight: 800;
@@ -140,7 +140,7 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 .card-arrow { display: grid; width: 38px; height: 38px; place-items: center; border: 2px solid var(--black); color: var(--black); background: transparent; font-size: 1.25rem; line-height: 1; transition: transform 220ms var(--ease-out), background-color 220ms ease, color 220ms ease; }
 .project-card:focus-visible .card-arrow { transform: translate(2px, -2px); color: var(--surface); background: var(--black); }
 
-.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 2px 0; border-top: 2px solid var(--black); color: var(--muted); font-size: .74rem; font-weight: 700; animation: arrive 600ms 400ms var(--ease-out) both; }
+.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 2px 0; border-top: 2px solid var(--surface); color: var(--surface); font-size: .74rem; font-weight: 700; animation: arrive 600ms 400ms var(--ease-out) both; }
 
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow); }
