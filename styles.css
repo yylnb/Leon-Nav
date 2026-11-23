@@ -125,7 +125,7 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 
 .card-index {
   justify-self: end;
-  color: rgba(58, 28, 16, .12);
+  color: var(--cobalt);
   font-family: var(--display);
   font-size: 6rem;
   font-weight: 800;
@@ -141,14 +141,14 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
 .card-domain { min-width: 0; color: var(--muted); font-size: .72rem; font-weight: 500; line-height: 1.6; overflow-wrap: anywhere; }
 .card-visit { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; font-size: .75rem; font-weight: 800; white-space: nowrap; }
-.card-arrow { display: inline-block; font-size: 1.25rem; line-height: 1; transition: transform 220ms var(--ease-out); }
-.project-card:focus-visible .card-arrow { transform: translate(2px, -2px); }
+.card-arrow { display: grid; width: 38px; height: 38px; place-items: center; border: 2px solid var(--cocoa); border-radius: 50%; color: var(--cocoa); background: transparent; font-size: 1.25rem; line-height: 1; transition: transform 220ms var(--ease-out), background-color 220ms ease, color 220ms ease; }
+.project-card:focus-visible .card-arrow { transform: translate(2px, -2px); color: var(--surface); background: var(--cocoa); }
 
 .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 2px 0; border-top: 2px solid var(--cocoa); color: var(--muted); font-size: .74rem; font-weight: 700; animation: arrive 600ms 400ms var(--ease-out) both; }
 
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover { transform: translateY(-3px); border-color: rgba(58, 28, 16, .4); box-shadow: var(--shadow); }
-  .project-card:hover .card-arrow { transform: translate(2px, -2px); }
+  .project-card:hover .card-arrow { transform: translate(2px, -2px); color: var(--surface); background: var(--cocoa); }
 }
 
 @keyframes arrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
