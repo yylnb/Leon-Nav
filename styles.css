@@ -120,6 +120,7 @@ h1 { margin: 0; font-family: var(--display); font-size: clamp(3.8rem, 8vw, 7rem)
 .project-card:nth-child(8) { animation-delay: 460ms; }
 .project-card:nth-child(9) { animation-delay: 500ms; }
 .project-card:nth-child(10) { animation-delay: 540ms; }
+.project-card:nth-child(11) { animation-delay: 580ms; }
 
 .card-index {
   justify-self: end;
